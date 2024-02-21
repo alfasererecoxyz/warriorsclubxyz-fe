@@ -1,0 +1,52 @@
+.page-grid {
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+  "header"
+  "hero"
+  "body"
+  "strip"
+;
+}
+
+@media (min-width: 768px) {
+.page-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 348px;
+  grid-template-areas: 
+    "header header strip"
+    "hero   hero   strip"
+    "body   body   strip"
+    "footer footer strip"
+  ;
+}
+}
+
+
+
+.page-grid__header {
+  grid-area: header;
+}
+
+.page-grid__strip {
+  grid-area: strip;
+  box-shadow: 
+    -2px 0 0 0 #ae0000, 
+    inset 4px 0 0 0 white;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-grid__strip {
+    grid-area: strip;
+    box-shadow: 
+    -2px 0 0 0 #ae0000, 
+    inset 4px 0 0 0 black;
+  }
+}
+.page-grid__hero {
+  grid-area: hero;
+}
+
+
+.page-grid__body {
+  grid-area: body;
+}

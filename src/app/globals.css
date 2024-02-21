@@ -2,32 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  .background {
+    background-color: #000000;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" opacity="0.5" viewBox="0 0 800 800"><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="ffflurry-grad" gradientTransform="rotate(270)"><stop stop-color="hsl(0, 0%, 6%)" stop-opacity="1" offset="0%"></stop><stop stop-color="hsl(1, 100%, 50%)" stop-opacity="1" offset="45%"></stop><stop stop-color="hsl(0, 52%, 78%)" stop-opacity="1" offset="100%"></stop></linearGradient></defs><rect width="100%" height="100%" fill="hsl(0, 0%, 6%)"></rect><g fill="url(%23ffflurry-grad)"><rect width="1675" height="1" x="-106.5" y="274.5" rx="0.5" transform="rotate(59, 731, 275)" opacity="0.97"></rect><rect width="1344" height="1" x="-597" y="198.5" rx="0.5" transform="rotate(59, 75, 199)" opacity="0.93"></rect><rect width="1729" height="1" x="-195.5" y="82.5" rx="0.5" transform="rotate(59, 669, 83)" opacity="0.47"></rect><rect width="1470" height="1" x="-43" y="478.5" rx="0.5" transform="rotate(59, 692, 479)" opacity="0.96"></rect><rect width="841" height="1" x="55.5" y="189.5" rx="0.5" transform="rotate(59, 476, 190)" opacity="0.86"></rect><rect width="2146" height="1" x="-432" y="684.5" rx="0.5" transform="rotate(59, 641, 685)" opacity="0.36"></rect><rect width="2500" height="1" x="-1154" y="675.5" rx="0.5" transform="rotate(59, 96, 676)" opacity="0.17"></rect><rect width="2695" height="1" x="-987.5" y="689.5" rx="0.5" transform="rotate(59, 360, 690)" opacity="0.93"></rect><rect width="2803" height="1" x="-947.5" y="450.5" rx="0.5" transform="rotate(59, 454, 451)" opacity="0.47"></rect><rect width="1502" height="1" x="-378" y="73.5" rx="0.5" transform="rotate(59, 373, 74)" opacity="0.33"></rect><rect width="1619" height="1" x="-703.5" y="375.5" rx="0.5" transform="rotate(59, 106, 376)" opacity="0.75"></rect><rect width="606" height="1" x="-157" y="71.5" rx="0.5" transform="rotate(59, 146, 72)" opacity="0.62"></rect><rect width="1962" height="1" x="-762" y="511.5" rx="0.5" transform="rotate(59, 219, 512)" opacity="0.63"></rect><rect width="1770" height="1" x="-302" y="285.5" rx="0.5" transform="rotate(59, 583, 286)" opacity="0.89"></rect><rect width="2757" height="1" x="-1083.5" y="270.5" rx="0.5" transform="rotate(59, 295, 271)" opacity="0.89"></rect></g></svg>');
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@media (prefers-color-scheme: light) {
+  .background {
+    background-color: #FFFFFF;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" opacity="0.5" viewBox="0 0 800 800"><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="ffflurry-grad" gradientTransform="rotate(270)"><stop stop-color="hsl(0, 0%, 6%)" stop-opacity="1" offset="0%"></stop><stop stop-color="hsl(1, 100%, 50%)" stop-opacity="1" offset="45%"></stop><stop stop-color="hsl(0, 52%, 78%)" stop-opacity="1" offset="100%"></stop></linearGradient></defs><rect width="100%" height="100%" fill="hsl(0, 0%, 100%)"></rect><g fill="url(%23ffflurry-grad)"><rect width="1675" height="1" x="-106.5" y="274.5" rx="0.5" transform="rotate(59, 731, 275)" opacity="0.97"></rect><rect width="1344" height="1" x="-597" y="198.5" rx="0.5" transform="rotate(59, 75, 199)" opacity="0.93"></rect><rect width="1729" height="1" x="-195.5" y="82.5" rx="0.5" transform="rotate(59, 669, 83)" opacity="0.47"></rect><rect width="1470" height="1" x="-43" y="478.5" rx="0.5" transform="rotate(59, 692, 479)" opacity="0.96"></rect><rect width="841" height="1" x="55.5" y="189.5" rx="0.5" transform="rotate(59, 476, 190)" opacity="0.86"></rect><rect width="2146" height="1" x="-432" y="684.5" rx="0.5" transform="rotate(59, 641, 685)" opacity="0.36"></rect><rect width="2500" height="1" x="-1154" y="675.5" rx="0.5" transform="rotate(59, 96, 676)" opacity="0.17"></rect><rect width="2695" height="1" x="-987.5" y="689.5" rx="0.5" transform="rotate(59, 360, 690)" opacity="0.93"></rect><rect width="2803" height="1" x="-947.5" y="450.5" rx="0.5" transform="rotate(59, 454, 451)" opacity="0.47"></rect><rect width="1502" height="1" x="-378" y="73.5" rx="0.5" transform="rotate(59, 373, 74)" opacity="0.33"></rect><rect width="1619" height="1" x="-703.5" y="375.5" rx="0.5" transform="rotate(59, 106, 376)" opacity="0.75"></rect><rect width="606" height="1" x="-157" y="71.5" rx="0.5" transform="rotate(59, 146, 72)" opacity="0.62"></rect><rect width="1962" height="1" x="-762" y="511.5" rx="0.5" transform="rotate(59, 219, 512)" opacity="0.63"></rect><rect width="1770" height="1" x="-302" y="285.5" rx="0.5" transform="rotate(59, 583, 286)" opacity="0.89"></rect><rect width="2757" height="1" x="-1083.5" y="270.5" rx="0.5" transform="rotate(59, 295, 271)" opacity="0.89"></rect></g></svg>')
   }
 }
