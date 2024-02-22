@@ -87,7 +87,7 @@ export default async function BlogPosts({searchParams}: {searchParams: {category
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
         {
-          allPosts.result.map(a => <CmsArticle data={a}/>)
+          allPosts.result.map(a => <CmsArticle key={a._id} data={a}/>)
         }
       </div>
     </div>

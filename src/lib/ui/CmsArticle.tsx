@@ -26,7 +26,7 @@ export function CmsArticle(props: CmsArticleProps) {
           objectFit='cover'
         />
         <div className='flex flex-row gap-2 justify-end'>
-          {props.data.categories.map(c => <CmsCategoryPill className='relative'>{c.title}</CmsCategoryPill>)}
+          {props.data.categories.map(c => <CmsCategoryPill key={c.title} className='relative'>{c.title}</CmsCategoryPill>)}
         </div>
       </div>
       <article className="bg-[#AE000011] dark:bg-[#AE000022] prose dark:prose-invert p-4 text-black dark:text-white">
