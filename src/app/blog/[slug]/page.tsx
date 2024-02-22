@@ -5,11 +5,18 @@ import Image from "next/image"
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const data = await CmsQuery.getPostBySlug(params.slug);
+
+  const title = `${data.result.title} | Warriors Club`;
+
   return ({
-    title: `${data.result.title} | Warriors Club`,
+    title,
     openGraph: {
-      title: data.result.title,
+      title,
+      type: "article",
+      publishedTime: data.result.publishedAt,
+      tags: data.result.categories.map(t => t.title),
       authors: data.result.author.name,
+      description: data.result.excerpt,
       images: {
         url: data.result.mainImage.asset.url,
       }
