@@ -69,7 +69,7 @@ export default async function BlogPosts({searchParams}: {searchParams: {category
           href="?category=ANNOUNCEMENT"
           className={cx(
             "px-4 py-1 rounded-full", 
-            searchParams.category === "LORE" ? "bg-bright-red-900 text-white" : "bg-black text-white dark:bg-white dark:text-black"
+            searchParams.category === "ANNOUNCEMENT" ? "bg-bright-red-900 text-white" : "bg-black text-white dark:bg-white dark:text-black"
           )}
         >
           Announcement
