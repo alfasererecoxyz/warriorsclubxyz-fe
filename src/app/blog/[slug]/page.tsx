@@ -27,6 +27,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function BlogPost({params}: { params: { slug: string } }) {
   const data = await CmsQuery.getPostBySlug(params.slug);
 
+  console.log(data.result.body)
+
   return (
     <div className="flex flex-col items-stretch p-4">
       <div className='relative h-[512px] flex flex-col justify-end p-2'>
@@ -54,7 +56,19 @@ export default async function BlogPost({params}: { params: { slug: string } }) {
           </span>
           <h1 className="my-0">{data.result.title}</h1>
         </article>
-        <PortableText value={data.result.body}/>
+        <PortableText
+          components={{
+            'types': {
+              'image': (props) => <Image 
+                src={props.value.asset.url} 
+                width={props.value.asset.metadata.dimensions.width}
+                height={props.value.asset.metadata.dimensions.height}
+                alt="inline image"
+              />
+            }
+          }}
+          value={data.result.body}
+        />
       </div>
     </div>
   )

@@ -90,7 +90,13 @@ export namespace CmsQuery {
     return cmsFetch<BaseCmsPost>(
       cmsQueryBuilder
       .clone()
-      .setQuery(`*[_type == "post" && slug.current == $slug][0]{${postAttributes}, body}`)
+      .setQuery(`*[_type == "post" && slug.current == $slug][0]{${postAttributes}, body[] {
+        ...,
+        _type == "image" => {
+          ...,
+          asset->
+        }
+      }}`)
       .setParams({slug})
     )
   }

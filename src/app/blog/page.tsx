@@ -66,6 +66,15 @@ export default async function BlogPosts({searchParams}: {searchParams: {category
           All
         </Link>
         <Link
+          href="?category=ANNOUNCEMENT"
+          className={cx(
+            "px-4 py-1 rounded-full", 
+            searchParams.category === "LORE" ? "bg-bright-red-900 text-white" : "bg-black text-white dark:bg-white dark:text-black"
+          )}
+        >
+          Announcement
+        </Link>
+        <Link
           href="?category=LORE"
           className={cx(
             "px-4 py-1 rounded-full", 
