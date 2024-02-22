@@ -51,7 +51,7 @@ export default async function Home() {
             <Header/>
           </HeaderArea>
           <StripArea className="hidden md:block bg-bright-red-800 p-4 overflow-y-clip relative sm:-z-10">
-            <Siwe/>
+            {/* <Siwe/> */}
             <Image 
               src="https://cdn.sanity.io/images/wf9a2g9o/production/e1fa89696dce0e214ac84e88791e1ded82dbb343-1152x3084.png"
               alt="Human Legion Warrior"
@@ -64,18 +64,18 @@ export default async function Home() {
             <div className="flex flex-col gap-8">
               <h1 className="prose dark:prose-invert dark:text-white text-black text-6xl">Be the now today, <br/>not tomorrow</h1>
               <div className="flex flex-row items-center gap-8">
-                <Button size={'lg'} className="flex-grow">
+                <Link href="/blog" className="flex-grow">
                   <BorderDecal br className="border-black dark:border-white">
-                    <div className="bg-black dark:bg-white dark:text-black text-white py-3">
-                      Get Started
+                    <div className="bg-black dark:bg-white dark:text-black text-white py-3 text-center">
+                      Learn More
                     </div>
                   </BorderDecal>
-                </Button>
-                <Button size={'lg'} className="flex-grow">
-                  <div className="border-2 text-black dark:border-white border-black dark:text-white py-3">
+                </Link>
+                <Link href="https://discord.gg/BCcV3uymGY" target="__blank" className="flex-grow">
+                  <div className="border-2 text-black dark:border-white border-black dark:text-white py-3 text-center">
                     Join the Community
                   </div>
-                </Button>
+                </Link>
               </div>
             </div>
             <div/>

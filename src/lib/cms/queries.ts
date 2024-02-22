@@ -1,194 +1,98 @@
 import { CmsQueryBuilder, cmsQueryBuilder } from "./CmsRequestBuilder";
 import { PortableTextComponent, PortableTextProps } from '@portabletext/react';
 
+type BaseCmsPost = {
+  _id: string,
+  title: string,
+  publishedAt: string
+  slug: {
+    current: string
+  }
+  excerpt: string,
+  body: PortableTextProps['value'],
+  categories: {title: string}[]
+  author: { 
+    name: string,
+    image: {
+      asset: {
+        url: string,
+        metadata: {
+          dimensions: {
+            aspectRatio: number,
+            width: number,
+            height: number
+          }
+        }
+      }
+    }
+  },
+  mainImage: {
+    asset: {
+      url: string,
+      metadata: {
+        dimensions: {
+          aspectRatio: number,
+          width: number,
+          height: number
+        }
+      }
+    }
+  } 
+}
+
+const postAttributes = `
+  _id, 
+  title,
+  slug{current},
+  publishedAt,
+  "excerpt": array::join(string::split((pt::text(body)), "")[0..255], "") + "...",
+  categories[]->{title},
+  author->{
+    name,
+    image{
+      asset->{
+        url,
+        metadata{
+          dimensions
+        }
+      }
+    }
+  },
+  mainImage{
+    asset->{
+      url,
+      metadata{
+        dimensions
+      }
+    }
+  }
+`
+
 export namespace CmsQuery {
 
   export function getLatestPost() {
-    return cmsFetch<{
-      _id: string,
-      title: string,
-      publishedAt: string
-      slug: {
-        current: string
-      }
-      excerpt: string,
-      body: PortableTextProps['value'],
-      author: { 
-        name: string,
-        image: {
-          asset: {
-            url: string,
-            metadata: {
-              dimensions: {
-                aspectRatio: number,
-                width: number,
-                height: number
-              }
-            }
-          }
-        }
-      },
-      mainImage: {
-        asset: {
-          url: string,
-          metadata: {
-            dimensions: {
-              aspectRatio: number,
-              width: number,
-              height: number
-            }
-          }
-        }
-      } 
-    }>(
+    return cmsFetch<BaseCmsPost>(
       cmsQueryBuilder
         .clone()
-        .setQuery(`
-        *[_type == "post"]|order(publishedAt desc)[0]{ 
-            _id, 
-            title,
-            slug{current},
-            publishedAt,
-            body,
-            "excerpt": array::join(string::split((pt::text(body)), "")[0..255], "") + "...",
-            author->{
-              name,
-              image{
-                asset->{
-                  url,
-                  metadata{
-                    dimensions
-                  }
-                }
-              }
-            },
-            mainImage{
-              asset->{
-                url,
-                metadata{
-                  dimensions
-                }
-              }
-            }
-          }
-        `)
+        .setQuery(`*[_type == "post"]|order(publishedAt desc)[0]{${postAttributes}}`)
     )
   }
 
   export function getPostBySlug(slug: string) {
-    return cmsFetch<{
-      _id: string,
-      title: string,
-      publishedAt: string
-      slug: {
-        current: string
-      }
-      body: PortableTextProps['value'],
-      author: { 
-        name: string,
-        image: {
-          asset: {
-            url: string,
-            metadata: {
-              dimensions: {
-                aspectRatio: number,
-                width: number,
-                height: number
-              }
-            }
-          }
-        }
-      },
-      mainImage: {
-        asset: {
-          url: string,
-          metadata: {
-            dimensions: {
-              aspectRatio: number,
-              width: number,
-              height: number
-            }
-          }
-        }
-      } 
-    }>(
+    return cmsFetch<BaseCmsPost>(
       cmsQueryBuilder
       .clone()
-      .setQuery(`
-      *[_type == "post" && slug.current == $slug][0]{ 
-        _id, 
-        title,
-        slug{current},
-        publishedAt,
-        body,
-        author->{
-          name,
-          image{
-            asset->{
-              url,
-              metadata{
-                dimensions
-              }
-            }
-          }
-        },
-        mainImage{
-          asset->{
-            url,
-            metadata{
-              dimensions
-            }
-          }
-        }
-      }
-      `)
-      .setParams({
-        slug
-      })
+      .setQuery(`*[_type == "post" && slug.current == $slug][0]{${postAttributes}, body}`)
+      .setParams({slug})
     )
   }
 
-  export function getAllPosts() {
-    return cmsFetch<Array<{
-      _id: string,
-      title: string,
-      slug: {
-        current: string
-      }
-      excerpt: string,
-      author: { name: string },
-      mainImage: {
-        asset: {
-          url: string,
-          metadata: {
-            dimensions: {
-              aspectRatio: number,
-              width: number,
-              height: number
-            }
-          }
-        }
-      }
-    }>>(
+  export function getPostsByCategory(category?: string) {
+    category ??= "BLOG"
+    return cmsFetch<Array<BaseCmsPost>>(
       cmsQueryBuilder
       .clone()
-      .setQuery(`
-      *[_type == "post"]{ 
-        _id, 
-        title,
-        slug{current},
-        "excerpt": array::join(string::split((pt::text(body)), "")[0..255], "") + "...",
-        author->{name},
-        mainImage{
-          asset->{
-            url,
-            metadata{
-              dimensions
-            }
-          }
-        }
-      }`
-      )
+      .setQuery(`*[_type == "post" && $category in categories[]->title]|order(publishedAt desc){${postAttributes}}`).setParams({category})
     )
   }
 
