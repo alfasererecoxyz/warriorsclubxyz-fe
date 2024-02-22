@@ -34,7 +34,7 @@ function PageGrid({className, ...rest}: DivProps) {
 
 
 export const metadata: Metadata = {
-  title: "Warriors Club | Home"
+  title: "Warriors Club"
 }
 
 

@@ -4,9 +4,14 @@ import { cx } from "class-variance-authority";
 import Link from "next/link";
 import Image from "next/image"
 import { BorderDecal } from "@/lib/ui/BorderDecal";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog | Warriors Club"
+}
 
 export default async function BlogPosts({searchParams}: {searchParams: {category?: string}}) {
-  const latestPost = await CmsQuery.getLatestPost();
+  const latestPost = await CmsQuery.getLatestFeaturedPost();
 
   if (!searchParams.category)
     searchParams.category = 'BLOG'
@@ -16,12 +21,15 @@ export default async function BlogPosts({searchParams}: {searchParams: {category
   return (
     <div>
       <div className="p-4">
-        <Image 
-          src={latestPost.result.mainImage.asset.url}
-          width={latestPost.result.mainImage.asset.metadata.dimensions.width}
-          height={latestPost.result.mainImage.asset.metadata.dimensions.height}
-          alt={latestPost.result.title}
-        />
+        <div className='relative h-[512px] flex flex-col justify-end p-2'>
+          <Image 
+            src={latestPost.result.mainImage.asset.url}
+            fill
+            objectFit='cover'
+            className="object-top"
+            alt={latestPost.result.title}
+          />
+        </div>
         <article className="bg-[#AE000011] dark:bg-[#AE000022] p-4 text-black dark:text-white flex flex-row justify-between">
           <div className="prose dark:prose-invert">
             <h4>{latestPost.result.title}</h4>

@@ -1,20 +1,37 @@
 import { CmsQuery } from "@/lib/cms/queries";
-import { Header } from "@/lib/ui/Header";
 import { PortableText } from "@portabletext/react";
+import { Metadata } from "next";
 import Image from "next/image"
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const data = await CmsQuery.getPostBySlug(params.slug);
+  return ({
+    title: `${data.result.title} | Warriors Club`,
+    openGraph: {
+      title: data.result.title,
+      authors: data.result.author.name,
+      images: {
+        url: data.result.mainImage.asset.url,
+      }
+    }
+  })
+}
 
 export default async function BlogPost({params}: { params: { slug: string } }) {
   const data = await CmsQuery.getPostBySlug(params.slug);
 
   return (
     <div className="flex flex-col items-stretch p-4">
-      <Image 
-        src={data.result.mainImage.asset.url} 
-        width={data.result.mainImage.asset.metadata.dimensions.width}
-        height={data.result.mainImage.asset.metadata.dimensions.height}
-        alt={data.result.title}
-      />
-      <div className="relative prose dark:prose-invert max-w-xl mx-auto pb-16 pt-4 px-8 bg-white dark:bg-black">
+      <div className='relative h-[512px] flex flex-col justify-end p-2'>
+        <Image 
+          src={data.result.mainImage.asset.url}
+          fill
+          objectFit='cover'
+          className="object-top"
+          alt={data.result.title}
+        />
+      </div>
+      <div className="relative prose dark:prose-invert max-w-xl mx-auto pb-16 pt-2 px-2 bg-white dark:bg-black">
         <article className="bg-[#AE000011] dark:bg-[#AE000022] prose dark:prose-invert p-4 text-black dark:text-white">
           <span className="p-0 text-xs flex flex-row items-center text-center">
             <Image 

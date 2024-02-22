@@ -69,8 +69,10 @@ export class CmsQueryBuilder {
         return [
           new URL(this.buildPath()+"?"+this.buildSearchParams(), this.config.baseUrl), 
           { 
-            method: 'GET', 
-            cache: 'no-cache'
+            method: 'GET',
+            next: {
+              revalidate: 3600
+            }
           }
         ]
       case "POST": 
@@ -78,7 +80,9 @@ export class CmsQueryBuilder {
           new URL(this.buildPath(), this.config.baseUrl), 
           { 
             method: 'POST',
-            cache: 'no-cache',
+            next: {
+              revalidate: 3600
+            },
             headers: {
               "Content-Type": "application/json"
             },

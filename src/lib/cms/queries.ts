@@ -78,6 +78,14 @@ export namespace CmsQuery {
     )
   }
 
+  export function getLatestFeaturedPost() {
+    return cmsFetch<BaseCmsPost>(
+      cmsQueryBuilder
+        .clone()
+        .setQuery(`*[_type == "post" && "FEATURED" in categories[]->title && "BLOG" in categories[]->title]|order(publishedAt desc)[0]{${postAttributes}}`)
+    )
+  }
+
   export function getPostBySlug(slug: string) {
     return cmsFetch<BaseCmsPost>(
       cmsQueryBuilder
@@ -92,7 +100,7 @@ export namespace CmsQuery {
     return cmsFetch<Array<BaseCmsPost>>(
       cmsQueryBuilder
       .clone()
-      .setQuery(`*[_type == "post" && $category in categories[]->title]|order(publishedAt desc){${postAttributes}}`).setParams({category})
+      .setQuery(`*[_type == "post" && $category in categories[]->title && "BLOG" in categories[]->title]|order(publishedAt desc){${postAttributes}}`).setParams({category})
     )
   }
 
