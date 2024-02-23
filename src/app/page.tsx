@@ -62,7 +62,7 @@ export default async function Home() {
           </StripArea>
           <HeroArea className="p-4 flex">
             <div className="flex flex-col gap-8">
-              <h1 className="prose dark:prose-invert dark:text-white text-black text-6xl">Be the now today, <br/>not tomorrow</h1>
+              <h1 className="prose dark:prose-invert dark:text-white text-black text-6xl">But fate, it seemed,<br/> had different plans.</h1>
               <div className="flex flex-row items-center gap-8">
                 <Link href="/blog" className="flex-grow">
                   <BorderDecal br className="border-black dark:border-white">
