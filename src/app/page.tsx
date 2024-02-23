@@ -2,13 +2,11 @@ import { cx } from "class-variance-authority";
 import "./page.css"
 import { Header } from "@/lib/ui/Header";
 import Image from "next/image";
-import { Button } from "@/lib/ui/Button";
 import { BorderDecal } from "@/lib/ui/BorderDecal";
-import { Siwe } from "@/lib/siwe/Siwe";
 import { BackgroundText } from "@/lib/ui/BackgroundText";
 import { CmsQuery } from "@/lib/cms/queries";
 import Link from "next/link";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 
 type DivProps = React.JSX.IntrinsicElements['div']
 
@@ -67,13 +65,13 @@ export default async function Home() {
                 <Link href="/blog" className="flex-grow">
                   <BorderDecal br className="border-black dark:border-white">
                     <div className="bg-black dark:bg-white dark:text-black text-white py-3 text-center">
-                      Learn More
+                      Explore
                     </div>
                   </BorderDecal>
                 </Link>
                 <Link href="https://discord.gg/BCcV3uymGY" target="__blank" className="flex-grow">
                   <div className="border-2 text-black dark:border-white border-black dark:text-white py-3 text-center">
-                    Join the Community
+                    Join the Army
                   </div>
                 </Link>
               </div>
